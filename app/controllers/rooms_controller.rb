@@ -3,6 +3,12 @@ class RoomsController < ApplicationController
     @rooms = Room.all
   end
 
+  def chess
+  end
+
+  def test
+  end
+
   def show
     @room = Room.find(params[:id])
     @message = Message.new

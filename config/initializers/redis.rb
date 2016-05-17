@@ -1,1 +1,3 @@
-$redis = Redis.new(:host => 'localhost', :port => 6379)
+require "redis"
+
+REDIS = Redis.new(Rails.application.config_for("redis/cable"))

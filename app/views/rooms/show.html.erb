@@ -1,5 +1,8 @@
-<h1>Chat room: <%= @room.name %></h1>
+<h1>Chess room: <%= @room.name %></h1>
 
+<%= render "chess" %>
+
+<h2>Chat:</h2>
 <div id="messages">
   <%= render @room.messages %>
 </div>
