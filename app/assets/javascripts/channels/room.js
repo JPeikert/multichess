@@ -4,7 +4,6 @@ App.room = App.cable.subscriptions.create("RoomChannel", {
     printMessage("Waiting for opponent...");
   },
   received: function(data) {
-    $('#messages').append(data['message']);
     switch (data.action) {
       case "game_start":
         App.board.position("start");
@@ -23,6 +22,8 @@ App.room = App.cable.subscriptions.create("RoomChannel", {
         break;
       case "opponent_forfeits":
         printMessage("Opponent forfeits. You win!");
+      case "speak":      
+        $('#messages').append(data['msg']);
         break;
     }
   }},

@@ -1,4 +1,6 @@
-class Game
+class Game < ApplicationRecord
+  belongs_to :room
+
   def self.start(uuid1, uuid2)
     white, black = [uuid1, uuid2].shuffle
 

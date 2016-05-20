@@ -2,12 +2,16 @@ class MessageBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(message)
-    ActionCable.server.broadcast 'rooms', message: render_message(message)
+    # TODO change rooms to both players
+    ActionCable.server.broadcast "rooms", {action: "speak", msg: render_message(message)}
+
+    #ActionCable.server.broadcast "player_#{uuid1}", {action: "speak", msg: render_message(message)}
+    #ActionCable.server.broadcast "player_#{uuid2}", {action: "speak", msg: render_message(message)}
   end
 
   private
     def render_message(message)
-      ApplicationController.renderer.render(partial: 'messages/message', locals: {message: message})
+      ApplicationController.renderer.render(partial: "messages/message", locals: {message: message})
     end
 
 end
