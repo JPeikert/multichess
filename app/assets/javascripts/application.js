@@ -11,8 +11,10 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery-readyselector
 //= require chessboard.min
 //= require chess.min
 //= require_tree .

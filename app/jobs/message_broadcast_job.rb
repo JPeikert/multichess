@@ -3,8 +3,8 @@ class MessageBroadcastJob < ApplicationJob
 
   def perform(message)
     # TODO change rooms to both players
-    ActionCable.server.broadcast "rooms", {action: "speak", msg: render_message(message)}
-
+    ActionCable.server.broadcast "player_#{message.room.player1}", {action: "speak", msg: render_message(message)}
+    ActionCable.server.broadcast "player_#{message.room.player2}", {action: "speak", msg: render_message(message)}
     #ActionCable.server.broadcast "player_#{uuid1}", {action: "speak", msg: render_message(message)}
     #ActionCable.server.broadcast "player_#{uuid2}", {action: "speak", msg: render_message(message)}
   end

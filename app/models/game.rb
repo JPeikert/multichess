@@ -7,8 +7,6 @@ class Game < ApplicationRecord
     ActionCable.server.broadcast "player_#{white}", {action: "game_start", msg: "white"}
     ActionCable.server.broadcast "player_#{black}", {action: "game_start", msg: "black"}
 
-    REDIS.set("opponent_for:#{white}", black)
-    REDIS.set("opponent_for:#{black}", white)
   end
 
   def self.make_move(uuid, data)
@@ -19,7 +17,7 @@ class Game < ApplicationRecord
   end
 
   def self.opponent_for(uuid)
-    REDIS.get("opponent_for:#{uuid}")
+    User.find(uuid).opponent
   end
 
   def self.forfeit(uuid)

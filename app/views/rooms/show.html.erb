@@ -1,6 +1,19 @@
 <h1>Chess room: <%= @room.name %></h1>
+<div id="room_number" data-value="<%= @room.id %>"><%= @room.id %></div>
 
-<%= render "chess" %>
+<h3>Player 1: </h3> <p><%= @room.player1 || 'empty' %></p>
+<h3>Player 2: </h3> <p><%= @room.player2 || 'empty' %></p>
+
+<%= link_to "Join game", join_path(id: @room.id), method: :post, remote: true %>
+<%= link_to "Exit game", exit_path(id: @room.id), method: :post %>
+<%= link_to "Clear all", clear_all_path(id: @room.id), method: :post %>
+
+<!--< render chess %>-->
+<div id="chessboard<%= @room.id %>" style="width: 400px"></div>
+
+<h2 id="chess">System messages:</h2>
+<div id="chess_messages"></div>
+
 
 <h2>Chat:</h2>
 <div id="messages">
