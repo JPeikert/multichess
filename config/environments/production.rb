@@ -48,9 +48,6 @@ Rails.application.configure do
   # when problems arise.
   config.log_level = :debug
 
-  config.middleware.use RoomActionCable
-  config.web_socket_server_url = 'wss://hidden-garden-74534.herokuapp.com/'
-
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
