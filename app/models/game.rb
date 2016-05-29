@@ -1,19 +1,22 @@
 class Game < ApplicationRecord
   belongs_to :room
 
-  def self.start(uuid1, uuid2)
+  def self.start(uuid1, uuid2, room)
     white, black = [uuid1, uuid2].shuffle
+    @room = room
 
-    ActionCable.server.broadcast "player_#{white}", {action: "game_start", msg: "white"}
-    ActionCable.server.broadcast "player_#{black}", {action: "game_start", msg: "black"}
+    ActionCable.server.broadcast "player_#{white}", {action: "game_start", msg: "white", room: room}
+    ActionCable.server.broadcast "player_#{black}", {action: "game_start", msg: "black", room: room}
+    logger.info "startujemy"
 
   end
 
   def self.make_move(uuid, data)
+    logger.info "GAME MAKE_MOVE ERROR"
     opponent = opponent_for(uuid)
     move_string = "#{data["from"]}-#{data["to"]}"
-
-    ActionCable.server.broadcast "player_#{opponent}", {action: "make_move", msg: move_string}
+    logger.info "data room: !!  #{data["room"]}"
+    ActionCable.server.broadcast "player_#{opponent}", {action: "make_move", msg: move_string, room: data["room"]}
   end
 
   def self.opponent_for(uuid)

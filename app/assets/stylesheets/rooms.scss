@@ -1,3 +1,110 @@
 // Place all the styles related to the Rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$primary-color: #888888;
+$secondary-color: #666666;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: $primary-color;
+}
+
+.rooms-container {
+  padding: 20px 50px;
+}
+
+header {
+  min-height: 80px;
+  background-color: $secondary-color;
+  
+  h2 {
+    margin: 0;
+  }
+
+  .user, .acc-options {
+    display: inline-block;
+  }
+
+  .user {
+    margin: 25px 30px;
+    float: left;
+  }
+
+  .acc-options {
+    margin: 30px;
+    float: right;
+  }
+}
+
+.room {
+  margin-bottom: 20px;
+
+  ._players-in-room {
+    display: inline-block;
+  }
+
+  ._room-name {
+    margin-left: 30px;
+    display: inline-block;
+  }
+}
+
+#rooms {
+  margin: 100px 0;
+  padding: 20px 50px;
+  background-color: $secondary-color;
+  box-shadow: 3px 3px 20px #000000;
+}
+
+#new-room {
+  margin-top: 100px;
+  text-align: right;
+}
+
+
+.room-name {
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+.game-details {
+  display: inline-block;
+  float: right;
+
+  .players {
+    box-shadow: 3px 3px 20px #000000;
+  }
+
+  .player-info {
+    h3, p {
+      display: inline-block;
+      margin: 5px;
+    }
+  }
+}
+
+.actions {
+  margin: 50px 0;
+}
+
+.game {
+  display: inline-block;
+}
+
+.msg-container {
+  margin-top: 80px;
+}
+
+.msg {
+  padding: 20px 40px;
+  display: inline-block;
+  box-shadow: 3px 3px 20px #000000;
+  min-width: 400px;
+}
+
+.msg-form {
+  display: inline-block;
+  float: right;
+}

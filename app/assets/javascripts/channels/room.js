@@ -1,24 +1,32 @@
-App.room = App.cable.subscriptions.create("RoomChannel", {
+App.room = App.cable.subscriptions.create({channel: "RoomChannel" },  {
 
   connected: function() {
     printMessage("Waiting for opponent...");
   },
   received: function(data) {
+    console.log("I received some data!! " + data.action)
+    room = $('#room_number').attr('data-value');
     switch (data.action) {
       case "game_start":
-        App.board.position("start");
-        App.board.orientation(data.msg);
-        printMessage("Game started! You play as " + data.msg + ".");
+        if (data.room == room) {
+          App.board[data.room].position("start");
+          App.board[data.room].orientation(data.msg);
+          printMessage("Game started! You play as " + data.msg + ". Your room: " + data.room);
+        }
         break;
       case "make_move":
-        [source, target] = data.msg.split("-");
-        App.board.move(data.msg);
-        App.chess.move({
-          from: source,
-          to: target,
-          promotion: "q"
-        });
-        App.board.position(App.chess.fen())
+        if (data.room == room) {
+          console.log("Data I received: " + data.msg + " AND: " + data.room);
+          [source, target] = data.msg.split("-");
+          App.board[data.room].move(data.msg);
+          App.chess[data.room].move({
+            from: source,
+            to: target,
+            promotion: "q"
+          });
+          App.board[data.room].position(App.chess[data.room].fen())
+          console.log("And finished with move");
+        }
         break;
       case "opponent_forfeits":
         printMessage("Opponent forfeits. You win!");

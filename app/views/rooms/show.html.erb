@@ -1,31 +1,50 @@
-<h1>Chess room: <%= @room.name %></h1>
-<div id="room_number" data-value="<%= @room.id %>"><%= @room.id %></div>
+<div class="rooms-container">
+  <div class="room-name">
+    <h1>Chess room: <%= @room.name %></h1>
+  </div>
+  <div class="game-details">
+    <div id="room_number" data-value="<%= @room.id %>" hidden><%= @room.id %></div>
 
-<h3>Player 1: </h3> <p><%= @room.player1 || 'empty' %></p>
-<h3>Player 2: </h3> <p><%= @room.player2 || 'empty' %></p>
+      <div class="players">
+        <div class="player-info">
+          <h3>Player 1: </h3> <p><%= @room.player1 || 'empty' %></p>
+        </div>
+        <div class="player-info">
+          <h3>Player 2: </h3> <p><%= @room.player2 || 'empty' %></p>
+        </div>
+      </div>
 
-<%= link_to "Join game", join_path(id: @room.id), method: :post, remote: true %>
-<%= link_to "Exit game", exit_path(id: @room.id), method: :post %>
-<%= link_to "Clear all", clear_all_path(id: @room.id), method: :post %>
+    <div class="actions">
+      <%= link_to "Join game", join_path(id: @room.id), method: :post, remote: true %>
+      <%= link_to "Exit game", exit_path(id: @room.id), method: :post %>
+      <%= link_to "Clear all", clear_all_path(id: @room.id), method: :post %>
+    </div>
 
-<!--< render chess %>-->
-<div id="chessboard<%= @room.id %>" style="width: 400px"></div>
+    <h2>System messages:</h2>
+    <div id="chess_messages"></div>
+  </div>
 
-<h2 id="chess">System messages:</h2>
-<div id="chess_messages"></div>
+  <div class="game">
+    <div id="chessboard<%= @room.id %>" style="width: 400px"></div>
+  </div>
 
+  <div class="msg-container">
+    <div class="msg">
+      <h2>Chat:</h2>
+      <div id="messages">
+        <%= render @room.messages %>
+      </div>
+    </div>
 
-<h2>Chat:</h2>
-<div id="messages">
-  <%= render @room.messages %>
+    <div class="msg-form">
+      <%= form_for @message, remote: true do |f| %>
+        <%= f.label :content, "Say something" %><br>
+        <%= f.text_area :content, id: "message_area" %>
+        <%= f.hidden_field :room, value: @room.id %>
+        <%= f.submit "Create", "data-behavior": "room_speaker", id: "clicker" %>
+      <% end %>
+      <%= link_to "Rooms list", rooms_path %>
+    </div>
+   
+  </div>
 </div>
-
-
-<%= form_for @message, remote: true do |f| %>
-  <%= f.label :content, "Say something" %><br>
-  <%= f.text_area :content, id: "message_area" %>
-  <%= f.hidden_field :room, value: @room.id %>
-  <%= f.submit "Create", "data-behavior": "room_speaker", id: "clicker" %>
-<% end %>
-
-<%= link_to "Rooms list", rooms_path %>

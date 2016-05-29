@@ -1,7 +1,7 @@
 # Be sure to restart your server when you modify this file. Action Cable runs in a loop that does not support auto reloading.
 class RoomChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "player_#{uid}"
+    stream_from "player_#{uid}"#{}"room_channel_#{params[:id]}"#
     #Seek.create(uid)
   end
 
@@ -11,8 +11,8 @@ class RoomChannel < ApplicationCable::Channel
    # Game.forfeit(uid)
   end
 
-
   def make_move(data)
+    logger.info "MAJOR ERROR!!!"
     Game.make_move(uid, data)
   end
   #def speak (data)

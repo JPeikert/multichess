@@ -1,15 +1,13 @@
-<h1>Rooms:</h1>
-<div id="rooms">
-  <%= render @rooms %>
-</div>
-<%= link_to "Create new room", new_room_path %>
-<%= link_to "Chess room", chess_path %>
+<div class="rooms-container">
 
-<% if current_user %>
-  <br>
-  <%= current_user.id %><br> <%= current_user.name %><br>
-  <%= link_to "Log out", logout_path, method: :delete %>
-<% else %>
-  <%= link_to "Log in", login_path %>
-  <%= link_to "Sign up", new_user_path %>
-<% end %>
+  <h1>Rooms:</h1>
+  <div id="rooms">
+    <%= render @rooms %>
+    <div id="new-room">
+      <%= link_to "Create new room", new_room_path %>
+    </div>
+  </div>
+</div>
+
+<!--<%= link_to "Chess room", chess_path %>-->
+

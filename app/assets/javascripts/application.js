@@ -18,3 +18,5 @@
 //= require chessboard.min
 //= require chess.min
 //= require_tree .
+App.chess = [];
+App.board = [];
