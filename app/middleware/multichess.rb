@@ -1,6 +1,7 @@
-class RoomActionCable  
+class RoomActionCable
   def initialize(app, options={})
     @app = app
+    ActionCable.server.config.allowed_request_origins = ["http://localhost:3000"]
   end
 
   def call(env)
