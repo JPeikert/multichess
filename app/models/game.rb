@@ -7,15 +7,15 @@ class Game < ApplicationRecord
 
     ActionCable.server.broadcast "player_#{white}", {action: "game_start", msg: "white", room: room}
     ActionCable.server.broadcast "player_#{black}", {action: "game_start", msg: "black", room: room}
-    logger.info "startujemy"
+    #logger.info "GAME STARTS"
 
   end
 
   def self.make_move(uuid, data)
-    logger.info "GAME MAKE_MOVE ERROR"
+    #logger.info "GAME MAKE_MOVE"
     opponent = opponent_for(uuid)
     move_string = "#{data["from"]}-#{data["to"]}"
-    logger.info "data room: !!  #{data["room"]}"
+    #logger.info "data room: !!  #{data["room"]}"
     ActionCable.server.broadcast "player_#{opponent}", {action: "make_move", msg: move_string, room: data["room"]}
   end
 

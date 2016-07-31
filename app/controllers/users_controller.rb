@@ -25,30 +25,6 @@ class UsersController < ApplicationController
     end
   end
 
-=begin
-  def show
-    if User.exists?(params[:id])
-      @user = User.find(params[:id])
-    else
-      redirect_to users_path
-    end
-  end
-
-  def edit
-    @user = User.find_by_id(session[:user_id])
-  end
-  
-  def update
-    @user = User.find_by_id(session[:user_id])
-    
-    if @user.update_attributes(user_params)
-      redirect_to user_path
-    else
-      render 'users/edit'
-    end
-  end
-=end
-
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :opponent)

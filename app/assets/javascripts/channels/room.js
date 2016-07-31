@@ -30,8 +30,15 @@ App.room = App.cable.subscriptions.create({channel: "RoomChannel" },  {
         break;
       case "opponent_forfeits":
         printMessage("Opponent forfeits. You win!");
+        break;
       case "speak":      
         $('#messages').append(data['msg']);
+        break;
+      case "player1_joins":
+        $('#p1').html(data['msg']);
+        break;
+      case "player2_joins":
+        $('#p2').html(data['msg']);
         break;
     }
   }},

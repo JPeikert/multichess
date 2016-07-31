@@ -7,17 +7,16 @@
 
       <div class="players">
         <div class="player-info">
-          <h3>Player 1: </h3> <p><%= @room.player1 || 'empty' %></p>
+          <h3>Player 1: </h3> <p id="p1"><%= @room.player1 || 'empty' %></p>
         </div>
         <div class="player-info">
-          <h3>Player 2: </h3> <p><%= @room.player2 || 'empty' %></p>
+          <h3>Player 2: </h3> <p id="p2"><%= @room.player2 || 'empty' %></p>
         </div>
       </div>
 
     <div class="actions">
-      <%= link_to "Join game", join_path(id: @room.id), method: :post, remote: true %>
-      <%= link_to "Exit game", exit_path(id: @room.id), method: :post %>
-      <%= link_to "Clear all", clear_all_path(id: @room.id), method: :post %>
+      <%= link_to "Join game", join_path(id: @room.id), method: :post, remote: true, class: "btn-secondary" %>
+      <%= link_to "Exit game", exit_path(id: @room.id), method: :post, class: "btn-secondary" %>
     </div>
 
     <h2>System messages:</h2>
@@ -41,9 +40,9 @@
         <%= f.label :content, "Say something" %><br>
         <%= f.text_area :content, id: "message_area" %>
         <%= f.hidden_field :room, value: @room.id %>
-        <%= f.submit "Create", "data-behavior": "room_speaker", id: "clicker" %>
+        <%= f.submit "Send", "data-behavior": "room_speaker", id: "clicker" %>
       <% end %>
-      <%= link_to "Rooms list", rooms_path %>
+      <%= link_to "Rooms list", rooms_path, class: "btn-secondary" %>
     </div>
    
   </div>

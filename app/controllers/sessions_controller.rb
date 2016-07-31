@@ -19,6 +19,6 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     cookies.signed[:name] = nil
-    redirect_to 'sessions/new'
+    redirect_to login_path
   end
 end

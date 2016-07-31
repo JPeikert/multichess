@@ -12,7 +12,6 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def make_move(data)
-    logger.info "MAJOR ERROR!!!"
     Game.make_move(uid, data)
   end
   #def speak (data)

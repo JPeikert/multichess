@@ -43,8 +43,9 @@ class RoomsController < ApplicationController
     if @room.player1 == nil
       @room.player1 = cookies.signed[:user_id]
       @room.save
+      ActionCable.server.broadcast "player_#{@room.player1}", {action: "player1_joins", msg: @room.player1}
   #    redirect_to room_path(@room)
-    elsif @room.player2 == nil
+    elsif @room.player2 == nil && @room.player1 != cookies.signed[:user_id]
       @room.player2 = cookies.signed[:user_id]
       @p1 = User.find(@room.player1)
       @p2 = User.find(cookies.signed[:user_id])
@@ -52,8 +53,10 @@ class RoomsController < ApplicationController
       @p2.opponent = @p1.id
       @p1.save
       @p2.save
-      Game.start(@room.player1, @room.player2, @room.id)
       @room.save
+      ActionCable.server.broadcast "player_#{@room.player1}", {action: "player2_joins", msg: @room.player2}
+      ActionCable.server.broadcast "player_#{@room.player2}", {action: "player2_joins", msg: @room.player2}
+      Game.start(@room.player1, @room.player2, @room.id)
     end
   end
 
@@ -66,7 +69,6 @@ class RoomsController < ApplicationController
         @p1.opponent = nil
         @p1.save
       end
-      #@room.game.forfeit(@room.player1)
       @room.player1 = nil
       @room.save
     elsif @room.player2 == cookies.signed[:user_id]
@@ -79,7 +81,11 @@ class RoomsController < ApplicationController
       @room.player2 = nil
       @room.save
     end
-    redirect_to room_path(@room)
+    if @room.player1 == nil && @room.player2 == nil
+      @room.messages.destroy_all
+      @room.destroy
+    end
+    redirect_to rooms_path #room_path(@room)
   end
 
   def clear_all

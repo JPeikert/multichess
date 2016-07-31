@@ -54,6 +54,7 @@ header {
 #rooms {
   margin: 100px 0;
   padding: 20px 50px;
+  border-radius: 5px;
   background-color: $secondary-color;
   box-shadow: 3px 3px 20px #000000;
 }
@@ -98,13 +99,22 @@ header {
 }
 
 .msg {
+  min-width: 400px;
   padding: 20px 40px;
   display: inline-block;
   box-shadow: 3px 3px 20px #000000;
-  min-width: 400px;
 }
 
 .msg-form {
   display: inline-block;
   float: right;
+  
+  label {
+    display: block;
+  }
+
+  input {
+    margin: 10px 0;
+    display: block; 
+  }
 }
