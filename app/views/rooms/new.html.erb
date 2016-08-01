@@ -1,12 +1,14 @@
-<div class="form">
-<h1>Create a new room<h1>
+<div class="rooms-container">
+  <div class="form">
+  <h1>Create a new room<h1>
 
 
-<%= form_for @room do |f| %>
-  <%= f.label :name, "Name" %>
-  <%= f.text_field :name %>
-  <%= f.submit "Create" %>
-<% end %>
+  <%= form_for @room do |f| %>
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %>
+    <%= f.submit "Create", class: "btn-secondary"  %>
+  <% end %>
+  </div>
+
+  <%= link_to "Back", rooms_path, class: "btn-secondary btn-back" %>
 </div>
-
-<%= link_to "Back", rooms_path, class: "btn-secondary" %>

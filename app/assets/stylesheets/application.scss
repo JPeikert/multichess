@@ -15,8 +15,8 @@
  *= require chessboard.min
  */
 
-$btn-color: #999999;
-$btn-hover-color: #888888;
+$btn-color: #AC6E35;
+$btn-hover-color: #8c5a2b;
 
 .btn {
   margin: 20px 0 0 10px;
@@ -49,4 +49,9 @@ $btn-hover-color: #888888;
   text-decoration: none;
   color: #000;
   font-size: 20px;
+}
+
+.btn-back {
+  margin: 80px 0;
+  float: right;
 }
